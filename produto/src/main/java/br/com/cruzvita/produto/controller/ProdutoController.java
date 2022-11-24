@@ -3,7 +3,6 @@ package br.com.cruzvita.produto.controller;
 import java.net.URI;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,20 +35,20 @@ public class ProdutoController {
 	    }
 	 
 	@GetMapping("/{id}") //Precisa passar o ID, e pra isso Precisamos passar o ID No Caminho do Endereço(ENDPOINT) Pra isso Usamos a anotação @PathVariable
-	    public ResponseEntity<ProdutoDTO> detalhar(@PathVariable @NotNull Long id) {
+	    public ResponseEntity<ProdutoDTO> detalhar(@PathVariable  Long id) {
 			ProdutoDTO dto = service.produtoPorId(id);
 
 	        return ResponseEntity.ok(dto);
 	    }
 	
 	 @PutMapping("/{id}") //RequestBody serve para Indicar no corpo da requisição o JSON para Atualizar o Produto
-	    public ResponseEntity<ProdutoDTO> atualizar(@PathVariable @NotNull Long id, @RequestBody @Valid ProdutoDTO dto) {
+	    public ResponseEntity<ProdutoDTO> atualizar(@PathVariable  Long id, @RequestBody @Valid ProdutoDTO dto) {
 		 ProdutoDTO atualizado = service.atualizarProduto(id, dto);
 	        return ResponseEntity.ok(atualizado);
 	    }
 	
     @PostMapping
-    public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody @Valid ProdutoDTO dto, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody ProdutoDTO dto, UriComponentsBuilder uriBuilder) {
     	ProdutoDTO produto = service.criarProduto(dto);
         URI endereco = uriBuilder.path("/produtos/{id}").buildAndExpand(produto.getId()).toUri();
 
@@ -57,7 +56,7 @@ public class ProdutoController {
     }
     
     @DeleteMapping("/{id}") 
-    public ResponseEntity<ProdutoDTO> remover(@PathVariable @NotNull Long id) {
+    public ResponseEntity<ProdutoDTO> remover(@PathVariable  Long id) {
         service.excluirProduto(id);
         return ResponseEntity.noContent().build();
     }
