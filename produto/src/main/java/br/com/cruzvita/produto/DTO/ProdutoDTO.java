@@ -11,6 +11,8 @@ public class ProdutoDTO {
 	private Double preco;
 	
 	private Status status;
+	
+	private Long id;
 
 	public Double getPreco() {
 		return preco;
