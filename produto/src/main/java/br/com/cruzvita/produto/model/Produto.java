@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,8 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "produtos")
 @Data
 @NoArgsConstructor //<- GERA 1 CONTRUTOR COM PARAMETROS PARA CADA ATRIBUTO DA CLASSE
-
-
+@EnableEurekaClient
 public class Produto {
 	
 	@Id
