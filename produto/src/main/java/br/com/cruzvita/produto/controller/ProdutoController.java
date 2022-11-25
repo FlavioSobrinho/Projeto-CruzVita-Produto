@@ -1,7 +1,5 @@
 package br.com.cruzvita.produto.controller;
 
-import java.net.URI;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.cruzvita.produto.DTO.ProdutoDTO;
 import br.com.cruzvita.produto.service.ProdutoService;
@@ -48,11 +45,9 @@ public class ProdutoController {
 	    }
 	
     @PostMapping
-    public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody ProdutoDTO dto, UriComponentsBuilder uriBuilder) {
-    	ProdutoDTO produto = service.criarProduto(dto);
-        URI endereco = uriBuilder.path("/produtos/{id}").buildAndExpand(produto.getId()).toUri();
+    public ResponseEntity<ProdutoDTO> cadastrar(@RequestBody ProdutoDTO dto) {
 
-        return ResponseEntity.created(endereco).body(produto);
+        return ResponseEntity.ok(service.criarProduto(dto));
     }
     
     @DeleteMapping("/{id}") 

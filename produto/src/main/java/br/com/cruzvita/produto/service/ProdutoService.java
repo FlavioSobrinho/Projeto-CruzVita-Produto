@@ -42,7 +42,7 @@ public class ProdutoService {
 			produto.setStatus(Status.DISPONIVEL);
 			repository.save(produto);
 			
-			return modelMapper.map(produto, ProdutoDTO.class);
+			return produtoDto;
 		}
 		
 		  public ProdutoDTO atualizarProduto(Long id, ProdutoDTO dto) {
